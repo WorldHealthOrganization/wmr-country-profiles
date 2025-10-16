@@ -24,6 +24,7 @@ The app will automatically detect if it's running in development mode and use th
 
 ```bash
 npm run build
+zip the contents of the dist folder, rename and install
 ```
 
 ### Installing in DHIS2
