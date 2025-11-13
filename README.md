@@ -92,11 +92,3 @@ wmr-country-profile.zip
 ## Environment Detection
 
 The app automatically detects its runtime environment:
-
-```typescript
-function isRunningInDHIS2(): boolean {
-  return typeof window !== 'undefined' && 
-         (window.location.pathname.includes('/dhis-web-') || 
-          window.location.pathname.includes('/api/apps/') ||
-          document.cookie.includes('JSESSIONID'));
-}
