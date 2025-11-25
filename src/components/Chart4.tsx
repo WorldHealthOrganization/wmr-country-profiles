@@ -259,7 +259,7 @@ export function Chart4({ orgUnit, period, chartId, setChartRef, chartSource }: C
           },
         },
         min: 0,
-        max: 105,
+        max: 100,
         beginAtZero: true,
       },
     },

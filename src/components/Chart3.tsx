@@ -60,7 +60,7 @@ export function Chart3({ orgUnit, period, chartId, setChartRef, chartSource }: C
       const periods = years.map(year => year.toString());
       
       // Data elements for Chart 3
-      const treatmentCoursesUID = 'OCuA0tI3BCi'; // 1st-line treatment courses distributed (bar)
+      const treatmentCoursesUID = 'hhmyDXcPavC'; // 1st-line treatment courses distributed (bar)
       const suspectedTestedUID = 'Rdbxu0qoX8U'; // Suspected cases tested % (line)
       const feverCasesUID = 'IGQENa04DFm'; // %<5 fever cases who had finger/heel stick (line)
       const actsPercentUID = 'heI5NQZqZRW'; // ACTs as % of all antimalarials received by <5 (line)
@@ -301,7 +301,7 @@ export function Chart3({ orgUnit, period, chartId, setChartRef, chartSource }: C
           },
         },
         min: 0,
-        max: 105,
+        max: 100,
       },
     },
     interaction: {

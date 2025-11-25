@@ -922,7 +922,7 @@ export function CountryProfile({ country, period }: CountryProfileProps) {
                       <th className="text-center py-1 px-1 font-medium text-gray-700 text-[10px] print:text-[10px] print:py-0.5 print:px-0.5">Median</th>
                       <th className="text-center py-1 px-1 font-medium text-gray-700 text-[10px] print:text-[10px] print:py-0.5 print:px-0.5">Max</th>
                       <th className="text-center py-1 px-1 font-medium text-gray-700 text-[10px] print:text-[10px] print:py-0.5 print:px-0.5">Follow-up</th>
-                      <th className="text-center py-1 px-1 font-medium text-gray-700 text-[10px] print:text-[10px] print:py-0.5 print:px-0.5">No. of studies</th>
+                      <th className="text-center py-1 px-1 font-medium text-gray-700 text-[10px] print:text-[10px] print:py-0.5 print:px-0.5">No.&nbsp;of<br />studies</th>
                       <th className="text-center py-1 px-1 font-medium text-gray-700 text-[10px] print:text-[10px] print:py-0.5 print:px-0.5">Species</th>
                     </tr>
                   </thead>
@@ -931,6 +931,12 @@ export function CountryProfile({ country, period }: CountryProfileProps) {
                       if (!efficacy.medicine || efficacy.medicine === '-') {
                         return null;
                       }
+                      // Format species text: replace P. falciparum with P.f and P. vivax with P.v (both italicized)
+                      const formatSpecies = (text: string) => {
+                        return text
+                          .replace(/P\.\s*falciparum/gi, '<em>P.f.</em>')
+                          .replace(/P\.\s*vivax/gi, '<em>P.v.</em>');
+                      };
                       return (
                       <tr key={index} className="avoid-break">
                         <td className="py-1 px-1 text-gray-700 font-normal text-[10px] print:text-[9px] print:py-0.5 print:px-0.5">{efficacy.medicine}</td>
@@ -940,7 +946,7 @@ export function CountryProfile({ country, period }: CountryProfileProps) {
                         <td className="py-1 px-1 text-center font-normal text-[10px] print:text-[9px] print:py-0.5 print:px-0.5">{efficacy.max !== null ? efficacy.max : '-'}</td>
                         <td className="py-1 px-1 text-center font-normal text-[10px] print:text-[9px] print:py-0.5 print:px-0.5">{efficacy.followUp}</td>
                         <td className="py-1 px-1 text-center font-normal text-[10px] print:text-[9px] print:py-0.5 print:px-0.5">{efficacy.numberOfStudies !== null ? efficacy.numberOfStudies : '-'}</td>
-                        <td className="py-1 px-1 text-center italic font-normal text-[10px] print:text-[9px] print:py-0.5 print:px-0.5">{efficacy.species}</td>
+                        <td className="py-1 px-1 text-center italic font-normal text-[10px] print:text-[9px] print:py-0.5 print:px-0.5" dangerouslySetInnerHTML={{ __html: formatSpecies(efficacy.species) }}></td>
                       </tr>
                       );
                     })}

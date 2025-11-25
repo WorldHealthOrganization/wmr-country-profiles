@@ -16,7 +16,7 @@ const DHIS2_DATA_ELEMENTS: Record<string, DataElement> = {
     shortName: 'Reporting completeness'
   },
   MAL_CARE_SOUGHT_ANY: {
-    uid: 'Uvn6LCg7dVU', 
+    uid: 'nvqnQcEbuPA', 
     name: 'Care sought from any provider',
     shortName: 'Care sought (any)'
   },

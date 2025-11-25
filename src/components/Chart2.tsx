@@ -239,7 +239,7 @@ export function Chart2({ orgUnit, period, chartId, setChartRef, chartSource }: C
           },
         },
         min: 0,
-        Max: 105,
+        Max: 100,
       },
     },
     interaction: {

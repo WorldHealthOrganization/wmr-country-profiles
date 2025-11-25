@@ -21,30 +21,33 @@ class DataTransformationService {
     // Add default transformation rules here
     // Example: Reporting completeness should be multiplied by 100
     this.addRules('BJXyRAkf2HZ', ['multiplyBy100'], 'Malaria reporting completeness');
-    this.addRules('Uvn6LCg7dVU', ['multiplyBy100'], 'Care sought from any provider');
-    this.addRules('o4iFtiN0YZh', ['multiplyBy100'], 'Care sought from public health facility');
+    this.addRules('o4iFtiN0YZh', ['multiplyBy100','nullZeros'], 'Care sought from public health facility');
+    this.addRules('nvqnQcEbuPA', ['multiplyBy100','nullZeros'], 'Care sought from any provider');
+    this.addRules('ZnSwOwcQt52', ['multiplyBy100','nullZeros'], '% <5 with a positive microscopy slide on the day of the survey');
+    this.addRules('gZrHErmb74i', ['multiplyBy100','nullZeros'], '% <5 with a positive rdt on the day of the survey');
+    this.addRules('SQWZ8POEhMI', ['multiplyBy100','nullZeros'], '% of the population who slept under an ITN the previous night(survey)');
+    this.addRules('LSlfr3VzLCp', ['multiplyBy100','nullZeros'], '% of households with at least 1 ITN (survey)');
+    this.addRules('IGQENa04DFm', ['multiplyBy100','nullZeros'], '%<5 fever cases who had finger/heel stick (survey)');
+    this.addRules('heI5NQZqZRW', ['multiplyBy100','nullZeros'], 'ACTs as % of all antimalarials received by <5(survey)');
+
+    this.addRules('rVUHAOEXV67', ['multiplyBy100'], '% population that has access to ITNs (Modelled))');
+
+
     //this.addRules('Rdbxu0qoX8U', ['multiplyBy100'], 'Suspected cases tested (%)');
     this.addRules('niYxtlxx68s', ['multiplyBy100', 'nullZeros', 'cut100'], 'At risk protected with IRS');
     this.addRules('nmmmi0UJr0C', ['nullZeros'], 'Suspected cases tested (%)');
 
 
-    this.addRules('IGQENa04DFm', ['nullZeros'], '%<5 fever cases who had finger/heel stick (survey)');
-    this.addRules('heI5NQZqZRW', ['nullZeros'], 'ACTs as % of all antimalarials received by <5(survey)');
-
+   
     this.addRules('ZoMFYowPAkO', ['multiplyBy100'], 'Slide positivity rate');
     this.addRules('eVYQuP1faAt', ['multiplyBy100'], 'RDT positivity rate');
 
-    this.addRules('ZnSwOwcQt52', ['nullZeros'], '% <5 with a positive microscopy slide on the day of the survey');
-    this.addRules('gZrHErmb74i', ['nullZeros'], '% <5 with a positive rdt on the day of the survey');
 
     //this.addRules('P7pI8pyU313', ['nullZeros'], 'Inpatient malaria deaths');
     //this.addRules('jDevPHyqPDX', ['nullZeros'], 'Inpatient malaria deaths - Under 5 yrs');
 
     this.addRules('Ruv1osltwn4', ['cut100', 'nullZeros'], 'At high risk protected with ITNs');
 
-    this.addRules('SQWZ8POEhMI', ['nullZeros'], '% of the population who slept under an ITN the previous night(survey)');
-    this.addRules('rVUHAOEXV67', ['multiplyBy100'], '% population that has access to ITNs (Modelled))');
-    this.addRules('LSlfr3VzLCp', ['multiplyBy100', 'nullZeros'], '% of households with at least 1 ITN (survey)');
     
   }
 
