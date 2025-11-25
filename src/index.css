@@ -1,0 +1,507 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ---- Print-specific utilities & baseline ---- */
+@layer utilities {
+  /* Preserve Tailwind bg/text colors on print */
+  .print-exact {
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+
+  /* Avoid breaking inside blocks (cards, figures, tables) */
+  .avoid-break {
+    break-inside: avoid;
+    page-break-inside: avoid;
+  }
+
+  /* Page-break helpers */
+  .pb-before { page-break-before: always; }
+  .pb-after  { page-break-after: always; }
+
+  /* Reset sticky/absolute/fixed for print */
+  .print-static { position: static !important; }
+
+    /* Avoid a page break *after* this element (keep it with what's next) */
+  .keep-with-next {
+    break-after: avoid;
+    page-break-after: avoid;
+  }
+
+  /* Avoid a page break *before* this element (keep it with what's before) */
+  .keep-with-prev {
+    break-before: avoid;
+    page-break-before: avoid;
+  }
+
+  @media print {
+    /* Optional: show link hrefs in print */
+    a[href^="http"]:after {
+      content: " (" attr(href) ")";
+      font-size: 0.8em;
+      color: #555;
+    }
+  }
+}
+
+/* Control paper size & margins (A4 by default) */
+@media print {
+  @page {
+    size: A4 portrait;
+    margin: 12mm;
+  }
+}
+
+/* Print Panel Control - Only affects print layout */
+@media print {
+  .print-panel-b {
+    page-break-before: avoid;
+    page-break-after: always;
+    break-before: avoid;
+    break-after: always;
+  }
+  
+  .print-panel-c {
+    page-break-before: always;
+    break-before: always;
+  }
+  
+  /* Ensure charts section doesn't force page breaks */
+  .print-panel-d {
+    page-break-after: avoid;
+    break-after: avoid;
+  }
+  
+  /* Force footnotes to stay with charts */
+  .print-panel-d + .footnotes,
+  .print-panel-d ~ .footnotes {
+    page-break-before: avoid;
+    break-before: avoid;
+    page-break-inside: avoid;
+    break-inside: avoid;
+  }
+}
+
+/* Print Styles */
+@media print {
+  /* Hide elements not needed for print */
+  .print\\:hidden {
+    display: none !important;
+  }
+  
+  /* Hide selectors in print */
+  .country-selector {
+    display: none !important;
+  }
+  
+  /* Remove backgrounds and shadows for better printing */
+  * {
+    -webkit-print-color-adjust: exact !important;
+    print-color-adjust: exact !important;
+  }
+  
+  body {
+    background: white !important;
+  }
+  
+  /* Remove shadows and rounded corners */
+  .shadow-sm,
+  .shadow-md,
+  .shadow-lg,
+  .shadow-xl {
+    box-shadow: none !important;
+  }
+  
+  .rounded-lg,
+  .rounded-xl {
+    border-radius: 0 !important;
+  }
+  
+  /* Remove borders from maps and charts in print */
+  .border,
+  .border-gray-200 {
+    border: none !important;
+  }
+  
+  /* Adjust margins and padding for print */
+  .max-w-7xl {
+    max-width: none !important;
+  }
+  
+  .px-4,
+  .px-6,
+  .px-8 {
+    padding-left: 0.5rem !important;
+    padding-right: 0.5rem !important;
+  }
+  
+  .py-8 {
+    padding-top: 1rem !important;
+    padding-bottom: 1rem !important;
+  }
+  
+  /* Ensure tables don't break across pages */
+  table {
+    page-break-inside: avoid;
+  }
+  
+  /* Keep chart containers together */
+  .h-72,
+  .h-80 {
+    page-break-inside: avoid;
+    height: 400px !important;
+    min-height: 400px !important;
+  }
+  
+  /* Adjust chart grid for print */
+  .grid-cols-1.md\\:grid-cols-2 {
+    grid-template-columns: 1fr 1fr !important;
+    gap: 1rem !important;
+  }
+  
+  /* Make charts larger in print */
+  .h-64 {
+    height: 400px !important;
+  }
+  
+  /* Ensure text is readable */
+  .text-white {
+    color: black !important;
+  }
+  
+  /* Remove gradients */
+  .bg-gradient-to-r,
+  .bg-gradient-to-br {
+    background: white !important;
+    border: 0px solid #FF0000 !important;
+  }
+  
+  /* Adjust spacing between sections */
+  /* Tighter spacing for print */
+  /* AGGRESSIVE SPACING REDUCTION */
+  
+  /* Eliminate almost all vertical spacing */
+  .space-y-8 > * + *,
+  .space-y-6 > * + *,
+  .space-y-4 > * + * {
+    margin-top: 0.125rem !important;
+  }
+  
+  /* Minimal padding everywhere */
+  .py-8,
+  .py-6,
+  .py-4 {
+    padding-top: 0.125rem !important;
+    padding-bottom: 0.125rem !important;
+  }
+  
+  /* Eliminate margins between sections */
+  .mb-8,
+  .mb-6,
+  .mb-4,
+  .mt-8,
+  .mt-6,
+  .mt-4 {
+    margin-top: 0.125rem !important;
+    margin-bottom: 0.125rem !important;
+  }
+  
+  /* Tight grid spacing */
+  .gap-8,
+  .gap-6,
+  .gap-4 {
+    gap: 0.125rem !important;
+  }
+  
+  /* Compact chart heights */
+  .h-96 {
+    height: 200px !important;
+  }
+  
+  .h-80 {
+    height: 180px !important;
+  }
+  
+  .h-72 {
+    height: 160px !important;
+  }
+  
+  .h-64 {
+    height: 140px !important;
+  }
+  
+  /* Target specific large gaps */
+  .max-w-7xl {
+    padding: 0.125rem !important;
+  }
+  
+  /* Eliminate section spacing */
+  section,
+  .bg-white {
+    margin: 0.125rem 0 !important;
+    padding: 0.25rem !important;
+  }
+  
+  /* Fix grid row spacing - target the actual grid containers */
+  .grid {
+    gap: 0.125rem !important;
+    row-gap: 0.125rem !important;
+  }
+  
+  /* More aggressive chart panel height reduction */
+  .bg-white.rounded-lg,
+  .bg-white.rounded-xl {
+    padding: 0.125rem !important;
+    margin: 0.125rem 0 !important;
+  }
+  
+  /* Container query approach for charts */
+  @container (max-height: 300px) {
+    .h-64, .h-72, .h-80 {
+      height: 180px !important;
+    }
+    
+    .h-64 canvas, .h-72 canvas, .h-80 canvas {
+      height: 180px !important;
+    }
+  }
+  
+  /* Target specific chart container heights for Charts 1-8 */
+  .h-64, .h-72, .h-80 {
+    height: auto !important;
+    max-height: none !important;
+    min-height: auto !important;
+    overflow: hidden !important;
+  }
+  
+  /* OPTION D: Aggressive Chart.js canvas sizing with !important */
+  .h-64 canvas, .h-72 canvas, .h-80 canvas {
+    height: auto !important;
+    max-height: 250px !important;
+    width: 100% !important;
+  }
+  
+  /* Target Chart.js chart containers specifically */
+  .h-64 .chartjs-render-monitor, .h-72 .chartjs-render-monitor, .h-80 .chartjs-render-monitor {
+    height: auto !important;
+    max-height: 250px !important;
+  }
+  
+  /* Force Chart.js responsive container */
+  .h-64 .chartjs-size-monitor, .h-72 .chartjs-size-monitor, .h-80 .chartjs-size-monitor {
+    height: auto !important;
+    max-height: 250px !important;
+  }
+  
+  /* Override any Chart.js inline styles */
+  .h-64 canvas[style], .h-72 canvas[style], .h-80 canvas[style] {
+    height: auto !important;
+    max-height: 250px !important;
+    width: 100% !important;
+  }
+  
+  /* Shrink chart panel containers to fit content */
+  .bg-white.rounded-lg.border.border-gray-200 {
+    padding: 0.25rem !important;
+    height: auto !important;
+    min-height: auto !important;
+  }
+  
+  /* Make chart containers fit their content */
+  .h-full {
+    height: auto !important;
+  }
+  
+  /* Chart 9 uses h-96 and is perfect, so leave it alone */
+  /* .h-96 stays at current height since Chart 9 is perfect */
+  
+  /* Prevent unwanted page breaks */
+  .avoid-break,
+  .bg-white,
+  section {
+    page-break-inside: avoid !important;
+    break-inside: avoid !important;
+  }
+  
+  /* Keep maps and profile section together */
+  .keep-with-next {
+    page-break-after: avoid !important;
+    break-after: avoid !important;
+  }
+  
+  /* Keep section titles with their content */
+  h2, h3 {
+    page-break-after: avoid !important;
+    break-after: avoid !important;
+    margin: 0.125rem 0 !important;
+    line-height: 1.1 !important;
+  }
+  
+  /* Compact headings */
+  h1, h2, h3 {
+    margin: 0.125rem 0 !important;
+    line-height: 1.1 !important;
+  }
+  
+  /* Remove extra spacing from containers */
+  .container,
+  .mx-auto {
+    padding: 0 !important;
+    margin: 0.125rem auto !important;
+  }
+  
+  /* Ensure borders are visible */
+  .border-gray-200 {
+     border: none !important;
+  }
+  
+  /* Make sure footnotes stay with content */
+  .footnotes {
+    page-break-inside: avoid;
+    page-break-before: avoid;
+    break-before: avoid;
+    margin-top: 0.25rem !important;
+  }
+  
+  /* Ensure footnotes stay with charts section */
+  .print-panel-d + .footnotes {
+    page-break-before: avoid !important;
+    break-before: avoid !important;
+    margin-top: 0.25rem !important;
+  }
+  
+  /* Override any conflicting page break rules for footnotes */
+  .footnotes.keep-with-prev {
+    page-break-before: avoid !important;
+    break-before: avoid !important;
+  }
+    .keep-with-prev.print\:mt-4 {
+    margin-top: 0.25rem !important;
+  }
+  /* Adjust font sizes for print */
+  .text-3xl {
+    font-size: 1.5rem !important;
+  }
+  
+  .text-xl {
+    font-size: 1.125rem !important;
+  }
+  
+  /* Fix grid row spacing - target the actual grid containers */
+  .grid {
+    gap: 0.125rem !important;
+    row-gap: 0.125rem !important;
+  }
+  
+  /* More aggressive chart panel height reduction */
+  .bg-white.rounded-lg,
+  .bg-white.rounded-xl {
+    padding: 0.125rem !important;
+    margin: 0.125rem 0 !important;
+  }
+  
+  /* Prevent unwanted page breaks */
+  .avoid-break,
+  .bg-white,
+  section {
+    page-break-inside: avoid !important;
+    break-inside: avoid !important;
+  }
+  
+  /* Keep maps and profile section together */
+  .keep-with-next {
+    page-break-after: avoid !important;
+    break-after: avoid !important;
+  }
+  
+  /* Ensure charts are visible */
+  canvas {
+    max-width: 100% !important;
+    height: auto !important;
+  }
+  
+  /* Page breaks */
+  .page-break-before {
+    page-break-before: always;
+  }
+  
+  .page-break-after {
+    page-break-after: always;
+  }
+  
+  .page-break-inside-avoid {
+    page-break-inside: avoid;
+  }
+  
+  /* CRITICAL: Prevent page breaks between charts and footnotes */
+  .print-panel-d {
+    page-break-after: avoid !important;
+    break-after: avoid !important;
+  }
+  
+  /* Force footnotes to stay on same page as charts - multiple targeting approaches */
+  .print-panel-d ~ .footnotes,
+  .print-panel-d + .footnotes,
+  .footnotes {
+    page-break-before: avoid !important;
+    break-before: avoid !important;
+    page-break-inside: avoid !important;
+    break-inside: avoid !important;
+  }
+  
+  /* Override any conflicting rules */
+  * {
+    page-break-after: auto !important;
+  }
+  
+  .print-panel-d {
+    page-break-after: avoid !important;
+  }
+  
+  .footnotes {
+    page-break-before: avoid !important;
+  }
+  
+  /* AGGRESSIVE: Force charts and footnotes to stay together */
+  .print-charts-section {
+    page-break-after: avoid !important;
+    break-after: avoid !important;
+    height: auto !important;
+    max-height: none !important;
+  }
+  
+  /* Reduce chart heights for print to fit on same page */
+  .print-charts-section .grid {
+    gap: 0.5rem !important;
+  }
+  
+  .print-charts-section .bg-white.rounded-lg {
+    height: 280px !important;
+    max-height: 280px !important;
+    padding: 0.5rem !important;
+  }
+  
+  /* Force footnotes to be on same page as charts */
+  .print-charts-section + .footnotes,
+  .print-charts-section ~ .footnotes {
+    page-break-before: avoid !important;
+    break-before: avoid !important;
+    margin-top: 0.125rem !important;
+  }
+  
+  /* NEW APPROACH: Container that keeps charts and footnotes together */
+  .print-charts-footnotes-container {
+    page-break-inside: avoid !important;
+    break-inside: avoid !important;
+  }
+  
+  /* Ensure the container doesn't break */
+  .print-charts-footnotes-container .print-charts-section,
+  .print-charts-footnotes-container .footnotes {
+    page-break-before: avoid !important;
+    page-break-after: avoid !important;
+    break-before: avoid !important;
+    break-after: avoid !important;
+  }
+}
