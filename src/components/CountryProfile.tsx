@@ -840,8 +840,8 @@ export function CountryProfile({ country, period }: CountryProfileProps) {
             {/* Policy Footnotes */}
             <div className="mt-4 pt-3 border-t border-gray-200 print:mt-2 print:pt-1 avoid-break">
               <div className="space-y-1 text-xs text-gray-600 print:text-[10px] print:space-y-0">
-                <p><strong>Yes*</strong> = Policy adopted, but not implemented in 2024</p>
-                <p><strong>Disc</strong> = Discontinued</p>
+                <p><strong>Yes*</strong> = Policy adopted, but not implemented in {period}, or no data exist to support implementation</p>
+                <p><strong>No</strong> = Policy does not exist or policy has been discontinued</p>
                 <p>Earliest year that policy is adopted was adjusted based on the earliest year that the WHO policy was recommended</p>
               </div>
             </div>
@@ -865,9 +865,16 @@ export function CountryProfile({ country, period }: CountryProfileProps) {
                     </tr>
                   </thead>
                   <tbody className="divide-y divide-gray-200 avoid-break">
-                    {data.treatment.map((treatment, index) => (
+                    {data.treatment.map((treatment, index) => {
+                      // Format category text to italicize P. falciparum and P. vivax
+                      const formatCategory = (text: string) => {
+                        return text
+                          .replace(/P\. falciparum/g, '<em>P. falciparum</em>')
+                          .replace(/P\. vivax/g, '<em>P. vivax</em>');
+                      };
+                      return (
                       <tr key={index} className="avoid-break">
-                        <td className="py-2 px-2 text-gray-700 print:py-1 print:px-1">{treatment.category}</td>
+                        <td className="py-2 px-2 text-gray-700 print:py-1 print:px-1" dangerouslySetInnerHTML={{ __html: formatCategory(treatment.category) }}></td>
                         {treatment.yearAdopted ? (
                           <>
                             <td className="py-2 px-2 text-gray-700 print:py-1 print:px-1">{treatment.medicine}</td>
@@ -881,7 +888,8 @@ export function CountryProfile({ country, period }: CountryProfileProps) {
                           </td>
                         )}
                       </tr>
-                    ))}
+                      );
+                    })}
                   </tbody>
                 </table>
               </div>
@@ -945,7 +953,7 @@ export function CountryProfile({ country, period }: CountryProfileProps) {
             <div className="avoid-break">
               <div className="flex items-center space-x-2 mb-4 print:mb-2">
                 <Shield className="h-5 w-5 text-red-500 print:h-4 print:w-4" />
-                <h3 className="font-semibold text-gray-900 print:text-xs print:leading-snug">Resistance status by insecticide class (2010-2024) and use of class for malaria vector control (2024)</h3>
+                <h3 className="font-semibold text-gray-900 print:text-xs print:leading-snug">Resistance status by insecticide class (2020-2024) and use of class for malaria vector control (2024)</h3>
               </div>
               <div className="overflow-x-auto">
                 <table className="w-full text-xs print:text-[10px]">

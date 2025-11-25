@@ -90,6 +90,7 @@ export function Chart7({ orgUnit, countryCode, currentRegion, period, chartId, s
           ];
         } else {
           dataElements = [
+            'bfRZJGS7KOh', // At risk protected with ITNs
             'LSlfr3VzLCp', // % of households with at least 1 ITN (survey)
             'niYxtlxx68s', // At risk protected with IRS
             'SQWZ8POEhMI'  // % of the population who slept under an ITN the previous night (survey)
@@ -109,7 +110,7 @@ export function Chart7({ orgUnit, countryCode, currentRegion, period, chartId, s
       // Process the data
       const datasets: any[] = [];
       
-      if (isE2025) {
+      if (isE2025 || currentRegion != 'AFR') {
         // E2025 countries datasets
         const atRiskITNData: (number | null)[] = [];
         const atRiskIRSData: (number | null)[] = [];
