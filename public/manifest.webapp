@@ -1,0 +1,30 @@
+{
+  "version": "1.2.2",
+  "name": "WMR Country Profiles",
+  "namespace": "wmr-country-profiles",
+  "description": "World Malaria Report Country Profile",
+  "launch_path": "./index.html",
+  "appType": "APP",
+  "short_name": "WMR Country Profile",
+  "icons": {
+    "16": "img/icons/icon_48.png",
+    "48": "img/icons/icon_48.png",
+    "128": "img/icons/icon_102.png"
+  },
+  "developer": {
+    "url": "https://www.who.int/teams/global-malaria-programme",
+    "date":  "10.10.2024"
+  },
+  "defaultLocale": "en",
+  "installs_allowed_from": null,
+  "activities": {
+    "dhis": {
+      "href": "*"
+    }
+  },
+  "authorities": [],
+  "dhis2": {
+    "apiVersion": "38",
+    "cacheVersion": "1.2.2"
+  }
+}
